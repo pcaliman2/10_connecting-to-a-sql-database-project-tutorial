@@ -26,6 +26,32 @@ if engine is None:
 # 2) Create the tables
 
 # 3) Insert data
+#Estor datos los saque del Archivo sql llamado
+#insert.sql que esta en la descripcion del proyecto en el directorio src
+#El with fue el etandard de Python
+with engine.connect() as connection:
+    connection.execute(text("""
+    INSERT INTO publishers (publisher_id, name) VALUES
+        (1, 'O Reilly Media'),
+        (2, 'A Book Apart'),
+        (3, 'A K PETERS'),
+        (4, 'Academic Press'),
+        (5, 'Addison Wesley'),
+        (6, 'Albert&Sweigart'),
+        (7, 'Alfred A. Knopf')
+    ON CONFLICT (publisher_id) DO NOTHING;
+
+    INSERT INTO authors (author_id, first_name, middle_name, last_name) VALUES
+        (1, 'Merritt', NULL, 'Eric'),
+        (2, 'Linda', NULL, 'Mui'),
+        (3, 'Alecos', NULL, 'Papadatos'),
+        (4, 'Anthony', NULL, 'Molinaro'),
+        (5, 'David', NULL, 'Cronin'),
+        (6, 'Richard', NULL, 'Blum'),
+        (7, 'Yuval', 'Noah', 'Harari'),
+        (8, 'Paul', NULL, 'Albitz')
+    ON CONFLICT (author_id) DO NOTHING;
+    """))
 
 # 4) Use Pandas to read and display a table
 

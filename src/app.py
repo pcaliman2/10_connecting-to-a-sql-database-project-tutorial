@@ -116,8 +116,6 @@ with engine.connect() as connection:
     ON CONFLICT (book_id) DO NOTHING;  
     """))
 
-
-
-;
 # 4) Use Pandas to read and display a table
-
+SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
+print(SalidaSQL)

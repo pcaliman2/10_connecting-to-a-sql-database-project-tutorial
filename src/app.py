@@ -3,7 +3,8 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
-# Esta Funcion crea la Conexión
+# Esta Funcion crea la Conexión y la dio 4Geeks
+
 def connect():
     global engine
     try:

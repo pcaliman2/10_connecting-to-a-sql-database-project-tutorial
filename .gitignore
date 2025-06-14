@@ -1,2 +1,15 @@
-.env
-.learn
+# Ignorar entornos virtuales
+pp/
+venv/
+env/
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar dependencias construidas
+*.egg-info/
+build/
+dist/

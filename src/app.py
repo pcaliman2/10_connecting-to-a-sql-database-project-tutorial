@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 def connect():
     global engine
+    print("entre")
     try:
         connection_string = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}/{os.getenv('DB_NAME')}"
         print("Starting the connection...")
@@ -20,16 +21,23 @@ def connect():
 
 #Defino un Subalgoritmo para ejecutar los sql
 def ejecutar_script_sql(engine, ruta_archivo_sql):
-    with open(ruta_archivo_sql, "r", encoding="utf-8") as archivo:
+    # Obtener la ruta absoluta del archivo SQL (resuelta y normalizada)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    ruta_relativa = os.path.normpath(os.path.join(base_dir, "..", ruta_archivo_sql))
+
+    if not os.path.exists(ruta_relativa):
+        raise FileNotFoundError(f"❌ No se encontró el archivo SQL: {ruta_relativa}")
+
+    with open(ruta_relativa, "r", encoding="utf-8") as archivo:
         script = archivo.read()
-#En Alchemy hay que ejecutar linea por linea por eso el Split
+
     with engine.connect() as conexion:
         for sentencia in script.strip().split(";"):
-            if sentencia.strip():  # omitir vacíos
+            if sentencia.strip():
                 conexion.execute(text(sentencia))
         conexion.commit()
 
-    print(f"✅ Script ejecutado correctamente: {ruta_archivo_sql}")
+    print(f"✅ Script ejecutado correctamente: {ruta_relativa}")
 
 
 #-------------------------------------------------------------
@@ -39,11 +47,13 @@ def ejecutar_script_sql(engine, ruta_archivo_sql):
 
 # 1) Connect to the database with SQLAlchemy
 load_dotenv()
-#engine = connect()
+connect()
+
 # 2) Create the tables
-#ejecutar_script_sql(engine, "sql/create.sql")
+ejecutar_script_sql(engine, "./src/sql/create.sql")
 # 3) Insert data
-#ejecutar_script_sql(engine, "sql/insert.sql")
+ejecutar_script_sql(engine, "./src/sql/insert.sql")
 # 4) Use Pandas to read and display a table
-#SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
-#print(SalidaSQL)
+SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
+print(SalidaSQL)
+#ejecutar_script_sql(engine, "./src/sql/drop.sql")

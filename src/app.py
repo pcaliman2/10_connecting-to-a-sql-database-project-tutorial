@@ -56,4 +56,4 @@ ejecutar_script_sql(engine, "./src/sql/insert.sql")
 # 4) Use Pandas to read and display a table
 SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
 print(SalidaSQL)
-#ejecutar_script_sql(engine, "./src/sql/drop.sql")
+#ejecutar_script_sql(engine, "./src/sql/drop.sql") #Tengo el Dropo aqui para los Experimentos

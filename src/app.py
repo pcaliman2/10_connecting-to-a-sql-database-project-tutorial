@@ -39,11 +39,11 @@ def ejecutar_script_sql(engine, ruta_archivo_sql):
 
 # 1) Connect to the database with SQLAlchemy
 load_dotenv()
-engine = connect()
+#engine = connect()
 # 2) Create the tables
-ejecutar_script_sql(engine, "sql/create.sql")
+#ejecutar_script_sql(engine, "sql/create.sql")
 # 3) Insert data
-ejecutar_script_sql(engine, "sql/insert.sql")
+#ejecutar_script_sql(engine, "sql/insert.sql")
 # 4) Use Pandas to read and display a table
-SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
-print(SalidaSQL)
+#SalidaSQL = pd.read_sql("SELECT * FROM publishers;", engine)
+#print(SalidaSQL)

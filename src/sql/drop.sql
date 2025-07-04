@@ -1,7 +1,4 @@
-DROP TABLE book_authors;
 
-DROP TABLE books;
+DROP TABLE lte_loc;
 
-DROP TABLE authors;
-
-DROP TABLE publishers;
+DROP TABLE lte_neigh_info;
